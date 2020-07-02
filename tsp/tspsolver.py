@@ -30,6 +30,9 @@ class NaiveTSPSolver:
                 logging.debug("\t\tDist: " + str(self.dist))
 
     def tour_to_dist(self, x):
+        # Sum all the distance between all pairs of cities on the tour.
+        # The second term is needed for the brute force, where city 0 is added to the solution in the end
+        # The third term is needed to add the way back from the last to the first city of the tour
         return sum([self.d[x[i], x[i+1]] for i in range(len(x) - 1)]) +\
                self.d[0, x[0]] +\
                self.d[0, x[-1]]

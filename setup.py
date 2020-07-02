@@ -21,4 +21,5 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=['numpy', 'pandas', 'scipy', 'networkx'],
+    entry_points={"console_scripts": ["tsp=tsp.__main__:main"]}
 )

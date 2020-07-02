@@ -15,9 +15,11 @@ Module Docstring
 def main():
     """ Main entry point of the app """
     parser = argparse.ArgumentParser(description='Solve the travelling salesman problem.')
+    installdir = os.path.dirname(__file__)
+    default_input = os.path.join(installdir, "data/msg_standorte_deutschland.csv")
     parser.add_argument('-i', '--input',
                         help='Path to the input csv file.',
-                        default="./data/msg_standorte_deutschland.csv")
+                        default=default_input)
     parser.add_argument('-d', '--debug',
                         help='Set logging level to debug',
                         action='store_true')
@@ -38,8 +40,10 @@ def main():
     # Check if input file is readable
     if not os.path.isfile(args.input):
         logging.error("File not found: " + args.input)
+        exit(1)
     if not os.access(args.input, os.R_OK):
         logging.error("No permission to read: " + args.input)
+        exit(1)
 
     # Read the input file
     logging.debug("Read input csv file")
@@ -78,17 +82,13 @@ def main():
     # Try to print a nicer representation of the tour if site names are available
     try:
         sites = msg_array['msg Standort'].tolist()
-        s = ' -> '.join(['{}'.format(sites[v]) for v in solver.solution])
+        s = ' -> '.join(['{}'.format(sites[v]) for v in solver.solution]) + ' ->' + sites[0]
         print("\t      {}".format(s))
     except:
         pass
     print("\tDist: " + str(solver.dist))
     print("\tRuntime: " + "{:10.6f}".format(runtime) + "s")
     print("-----------------------")
-
-    #https://www.jetbrains.com/help/pycharm/set-up-a-git-repository.html#check_project_status
-    #https://jakevdp.github.io/PythonDataScienceHandbook/04.13-geographic-data-with-basemap.html
-    #https://pypi.org/project/googlemaps/1.0.2/
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
