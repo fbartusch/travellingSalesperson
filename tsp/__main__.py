@@ -86,7 +86,7 @@ def main():
         print("\t      {}".format(s))
     except:
         pass
-    print("\tDist: {:10.2} km".format(solver.dist))
+    print("\tDist: {:10.2f} km".format(solver.dist))
     print("\tRuntime: {:10.6f}".format(runtime) + "s")
     print("-----------------------")
 
