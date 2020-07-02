@@ -86,9 +86,10 @@ def main():
         print("\t      {}".format(s))
     except:
         pass
-    print("\tDist: " + str(solver.dist))
-    print("\tRuntime: " + "{:10.6f}".format(runtime) + "s")
+    print("\tDist: {:10.2} km".format(solver.dist))
+    print("\tRuntime: {:10.6f}".format(runtime) + "s")
     print("-----------------------")
+
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
